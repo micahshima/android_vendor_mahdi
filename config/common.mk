@@ -31,7 +31,9 @@ PRODUCT_COPY_FILES += \
     vendor/mahdi/prebuilt/common/bin/backuptool.sh:system/bin/backuptool.sh \
     vendor/mahdi/prebuilt/common/bin/backuptool.functions:system/bin/backuptool.functions \
     vendor/mahdi/prebuilt/common/bin/50-mahdi.sh:system/addon.d/50-mahdi.sh \
-    vendor/mahdi/prebuilt/common/bin/blacklist:system/addon.d/blacklist
+    vendor/mahdi/prebuilt/common/bin/blacklist:system/addon.d/blacklist \
+    vendor/mahdi/prebuilt/common/bin/99-backup.sh:system/addon.d/99-backup.sh \
+    vendor/mahdi/prebuilt/common/etc/backup.conf:system/etc/backup.conf
 endif
 
 # init.d support
