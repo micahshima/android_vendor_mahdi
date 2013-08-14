@@ -1,0 +1,3 @@
+add_lunch_combo mahdi_grouper-userdebug
+add_lunch_combo mahdi_jfltexx-userdebug
+add_lunch_combo mahdi_mako-userdebug
