@@ -122,3 +122,6 @@ $(call inherit-product, frameworks/base/data/videos/VideoPackage2.mk)
 
 # Inherit common product build prop overrides
 -include vendor/mahdi/configs/common_versions.mk
+
+# Common sepolicy
+-include vendor/mahdi/sepolicy/sepolicy.mk
