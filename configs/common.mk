@@ -125,7 +125,3 @@ $(call inherit-product, frameworks/base/data/videos/VideoPackage2.mk)
 
 # Common sepolicy
 -include vendor/mahdi/sepolicy/sepolicy.mk
-
-# block stock OTAs
-PRODUCT_COPY_FILES += \
-    vendor/mahdi/prebuilt/common/bin/otablock:system/bin/otablock
