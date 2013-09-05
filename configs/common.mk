@@ -57,6 +57,8 @@ PRODUCT_COPY_FILES +=  \
     vendor/mahdi/prebuilt/common/app/Superuser.apk:system/app/Superuser.apk \
     vendor/mahdi/prebuilt/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon \
     vendor/mahdi/prebuilt/common/etc/install-recovery.sh:system/etc/install-recovery.sh \
+    vendor/mahdi/prebuilt/common/etc/.has_su_daemon:system/etc/.has_su_daemon \
+    vendor/mahdi/prebuilt/common/etc/.installed_su_daemon:system/etc/.installed_su_daemon \
     vendor/mahdi/prebuilt/common/bin/.ext/.su:system/bin/.ext/.su \
     vendor/mahdi/prebuilt/common/xbin/daemonsu:system/xbin/daemonsu \
     vendor/mahdi/prebuilt/common/xbin/su:system/xbin/su
