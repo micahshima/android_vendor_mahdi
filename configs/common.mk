@@ -72,15 +72,12 @@ PRODUCT_COPY_FILES +=  \
 PRODUCT_COPY_FILES +=  \
     vendor/mahdi/prebuilt/common/app/XposedInstaller-2.1.4.apk:system/app/XposedInstaller-2.1.4.apk
 
-# CM Lockclock & Filemanager
-PRODUCT_COPY_FILES +=  \
-    vendor/mahdi/prebuilt/common/app/LockClock.apk:system/app/LockClock.apk \
-    vendor/mahdi/prebuilt/common/app/CMFileManager.apk:system/app/CMFileManager.apk
-
 # Optional Mahdi packages
 PRODUCT_PACKAGES += \
     SoundRecorder \
-    Basic
+    Basic \
+    CMFileManager \
+    LockClock
 
 # Extra tools
 PRODUCT_PACKAGES += \
