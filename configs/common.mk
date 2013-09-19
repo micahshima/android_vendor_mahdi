@@ -70,7 +70,7 @@ PRODUCT_COPY_FILES +=  \
 
 # Xposed Framework apk
 PRODUCT_COPY_FILES +=  \
-    vendor/mahdi/prebuilt/common/app/XposedInstaller-2.1.4.apk:system/app/XposedInstaller-2.1.4.apk
+    vendor/mahdi/prebuilt/common/app/Xposed-Installer.apk:system/app/Xposed-Installer.apk
 
 # Optional Mahdi packages
 PRODUCT_PACKAGES += \
