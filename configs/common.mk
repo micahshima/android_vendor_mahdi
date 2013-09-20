@@ -72,10 +72,11 @@ PRODUCT_COPY_FILES +=  \
 PRODUCT_COPY_FILES +=  \
     vendor/mahdi/prebuilt/common/app/Xposed-Installer.apk:system/app/Xposed-Installer.apk
 
-# Optional Mahdi packages
+# Mahdi packages
 PRODUCT_PACKAGES += \
     SoundRecorder \
     Basic \
+    BluetoothExt \
     CMFileManager \
     LockClock
 
