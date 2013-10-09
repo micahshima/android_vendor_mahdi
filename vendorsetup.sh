@@ -1,4 +1,5 @@
 add_lunch_combo mahdi_flo-userdebug
+add_lunch_combo mahdi_galaxysmtd-userdebug
 add_lunch_combo mahdi_grouper-userdebug
 add_lunch_combo mahdi_jfltexx-userdebug
 add_lunch_combo mahdi_mako-userdebug
