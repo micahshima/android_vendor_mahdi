@@ -3,3 +3,4 @@ add_lunch_combo mahdi_galaxysmtd-userdebug
 add_lunch_combo mahdi_grouper-userdebug
 add_lunch_combo mahdi_jfltexx-userdebug
 add_lunch_combo mahdi_mako-userdebug
+add_lunch_combo mahdi_i9100-userdebug
