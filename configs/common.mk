@@ -117,9 +117,6 @@ PRODUCT_PACKAGES += \
 # easy way to extend to add more packages
 -include vendor/extra/product.mk
 
-# Bring in all video prebuilts
-$(call inherit-product, frameworks/base/data/videos/VideoPackage2.mk)
-
 # Inherit common product build prop overrides
 -include vendor/mahdi/configs/common_versions.mk
 
