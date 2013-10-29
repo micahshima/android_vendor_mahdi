@@ -72,6 +72,10 @@ PRODUCT_COPY_FILES +=  \
 PRODUCT_COPY_FILES +=  \
     vendor/mahdi/prebuilt/common/app/Xposed-Installer.apk:system/app/Xposed-Installer.apk
 
+# Sunbeam Livewallpaper apk
+PRODUCT_COPY_FILES +=  \
+    vendor/mahdi/prebuilt/common/app/SunBeam.apk:system/app/SunBeam.apk
+
 # Mahdi packages
 PRODUCT_PACKAGES += \
     SoundRecorder \
