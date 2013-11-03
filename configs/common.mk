@@ -80,9 +80,8 @@ PRODUCT_COPY_FILES +=  \
 PRODUCT_PACKAGES += \
     SoundRecorder \
     Basic \
-    BluetoothExt \
     CMFileManager \
-    LockClock
+    LockClock       
 
 # Extra tools
 PRODUCT_PACKAGES += \
@@ -97,12 +96,7 @@ PRODUCT_PACKAGES += \
     nano \
     htop \
     powertop \
-    lsof \
-    mount.exfat \
-    fsck.exfat \
-    mkfs.exfat \
-    ntfsfix \
-    ntfs-3g
+    lsof 
 
 # Openssh
 PRODUCT_PACKAGES += \
@@ -123,6 +117,3 @@ PRODUCT_PACKAGES += \
 
 # Inherit common product build prop overrides
 -include vendor/mahdi/configs/common_versions.mk
-
-# Common sepolicy
--include vendor/mahdi/sepolicy/sepolicy.mk
