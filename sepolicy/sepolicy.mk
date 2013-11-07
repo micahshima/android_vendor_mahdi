@@ -1,9 +1,12 @@
 #
-# This policy configuration will be used by all products
+# This policy configuration will be used by all products that
+# inherit from Mahdi-Rom
 #
 
-BOARD_SEPOLICY_DIRS := \
+BOARD_SEPOLICY_DIRS += \
     vendor/mahdi/sepolicy
 
-BOARD_SEPOLICY_UNION := \
+BOARD_SEPOLICY_UNION += \
+    file_contexts \
+    seapp_contexts \
     mac_permissions.xml
