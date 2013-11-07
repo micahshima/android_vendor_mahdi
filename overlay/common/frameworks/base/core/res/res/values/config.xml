@@ -7,10 +7,10 @@
     <string name="default_wallpaper_component" translatable="false">com.android.phasebeam/.PhaseBeamWallpaper</string>
 
     <string-array name="config_locationProviderPackageNames" translatable="false">
+	<!-- The Google provider -->
+        <item>com.google.android.gms</item>
         <!-- The standard AOSP fused location provider -->
-        <item>com.android.location.fused</item>
-        <!-- The Google provider -->
-        <item>com.google.android.location</item>
+        <item>com.android.location.fused</item>        
     </string-array>
 
     <!-- Disable stock OTA components if installed -->
