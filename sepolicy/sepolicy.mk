@@ -6,6 +6,7 @@ BOARD_SEPOLICY_DIRS += \
     vendor/mahdi/sepolicy
 
 BOARD_SEPOLICY_UNION += \
+    file.te \
     file_contexts \
     fs_use \
     seapp_contexts \
