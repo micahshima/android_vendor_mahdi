@@ -70,7 +70,7 @@ PRODUCT_COPY_FILES +=  \
 
 # Xposed Framework apk
 PRODUCT_COPY_FILES +=  \
-    vendor/mahdi/prebuilt/common/app/Xposed-Installer.apk:system/app/Xposed-Installer.apk
+    vendor/mahdi/prebuilt/common/app/XposedInstaller_2.4-beta1.apk:system/app/XposedInstaller_2.4-beta1.apk
 
 # Sunbeam Livewallpaper apk
 PRODUCT_COPY_FILES +=  \
