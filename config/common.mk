@@ -111,6 +111,7 @@ PRODUCT_PACKAGES += \
 
 # Extra tools in Mahdi
 PRODUCT_PACKAGES += \
+    libsepol \
     bash \
     openvpn \
     e2fsck \
