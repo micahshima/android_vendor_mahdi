@@ -81,7 +81,9 @@ PRODUCT_PACKAGES += \
     SoundRecorder \
     Basic \
     CMFileManager \
-    LockClock       
+    LockClock \
+    ScreenRecorder \
+    libscreenrecorder       
 
 # Extra tools
 PRODUCT_PACKAGES += \
