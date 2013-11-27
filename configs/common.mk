@@ -83,7 +83,8 @@ PRODUCT_PACKAGES += \
     CMFileManager \
     LockClock \
     ScreenRecorder \
-    libscreenrecorder       
+    libscreenrecorder \
+    BluetoothExt       
 
 # Extra tools
 PRODUCT_PACKAGES += \
