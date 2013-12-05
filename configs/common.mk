@@ -72,6 +72,10 @@ PRODUCT_COPY_FILES +=  \
 PRODUCT_COPY_FILES +=  \
     vendor/mahdi/prebuilt/common/app/XposedInstaller_2.4.1.apk:system/app/XposedInstaller_2.4.1.apk
 
+# AppSettings apk
+PRODUCT_COPY_FILES +=  \
+    vendor/mahdi/prebuilt/common/app/AppSettings.apk:system/app/AppSettings.apk
+
 # Sunbeam Livewallpaper apk
 PRODUCT_COPY_FILES +=  \
     vendor/mahdi/prebuilt/common/app/SunBeam.apk:system/app/SunBeam.apk
