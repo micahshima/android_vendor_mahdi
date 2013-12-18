@@ -1,7 +1,6 @@
 # Inherit common stuff
 $(call inherit-product, vendor/mahdi/configs/common_full.mk)
 
-PRODUCT_PACKAGES += \
-  Mms
+$(call inherit-product, vendor/mahdi/configs/telephony.mk)
 
 
