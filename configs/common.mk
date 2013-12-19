@@ -80,6 +80,9 @@ PRODUCT_COPY_FILES +=  \
 PRODUCT_COPY_FILES +=  \
     vendor/mahdi/prebuilt/common/app/SunBeam.apk:system/app/SunBeam.apk
 
+# T-Mobile theme engine
+include vendor/mahdi/configs/themes_common.mk
+
 # Mahdi packages
 PRODUCT_PACKAGES += \
     SoundRecorder \
