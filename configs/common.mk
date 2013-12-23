@@ -97,7 +97,8 @@ PRODUCT_PACKAGES += \
     Apollo \
     DSPManager \
     libcyanogen-dsp \
-    audio_effects.conf      
+    audio_effects.conf \
+    MahdiCenter     
 
 # Extra tools
 PRODUCT_PACKAGES += \
