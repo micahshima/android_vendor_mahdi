@@ -184,13 +184,13 @@ if [ ! -r "${DIR}/out/versions_checked.mk" ] && [ -n "$(java -version 2>&1 | gre
         JAVA_VERSION="java_version=${JVER}"
 fi
 
-if [ -r vendor/cm/get-prebuilts ]; then
-        if [ -r vendor/cm/proprietary/.get-prebuilts ]; then
+if [ -r vendor/${VENDOR}/get-prebuilts ]; then
+        if [ -r vendor/${VENDOR}/proprietary/.get-prebuilts ]; then
                 echo -e "${bldgrn}Already downloaded prebuilts${txtrst}"
         else
                 echo -e "${bldblu}Downloading prebuilts${txtrst}"
-                pushd vendor/cm > /dev/null
-                ./get-prebuilts && touch proprietary/.get-prebuilts
+                pushd vendor/${VENDOR} > /dev/null
+                source ./get-prebuilts && touch proprietary/.get-prebuilts
                 popd > /dev/null
         fi
 else

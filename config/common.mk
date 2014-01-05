@@ -54,8 +54,8 @@ PRODUCT_COPY_FILES += \
 
 # Compcache/Zram support
 PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/bin/compcache:system/bin/compcache \
-    vendor/cm/prebuilt/common/bin/handle_compcache:system/bin/handle_compcache
+    vendor/mahdi/prebuilt/common/bin/compcache:system/bin/compcache \
+    vendor/mahdi/prebuilt/common/bin/handle_compcache:system/bin/handle_compcache
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
@@ -90,7 +90,7 @@ PRODUCT_PACKAGES += \
     LatinIME \
     BluetoothExt
 
-# Optional CM packages
+# Optional Mahdi packages
 PRODUCT_PACKAGES += \
     Apollo \
     CMFileManager \
