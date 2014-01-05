@@ -1,5 +1,4 @@
 SUPERUSER_EMBEDDED := true
-SUPERUSER_PACKAGE_PREFIX := com.android.settings.cyanogenmod.superuser
 
 ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -69,31 +68,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/mahdi/prebuilt/common/lib/libjni_latinime.so:system/lib/libjni_latinime.so
 
-# These can be skipped
-ifneq ($(WITHOUT_PROP_APPS),true)
-
-# Xposed Framework Installer
-PRODUCT_COPY_FILES += \
-    vendor/mahdi/proprietary/XposedInstaller.apk:system/app/XposedInstaller.apk
-
-# Xposed AppSettings
-PRODUCT_COPY_FILES += \
-    vendor/mahdi/proprietary/XposedAppSettings.apk:system/app/XposedAppSettings.apk
-
-# Sunbeam Livewallpaper apk
-#PRODUCT_COPY_FILES +=  \
-#    vendor/mahdi/prebuilt/common/app/SunBeam.apk:system/app/SunBeam.apk
-
-# Goo.IM manager
-PRODUCT_COPY_FILES += \
-    vendor/mahdi/proprietary/com.s0up.goomanager-2.apk:system/app/com.s0up.goomanager-2.apk
-
-# Fdroid FOSS App Store
-PRODUCT_COPY_FILES += \
-    vendor/mahdi/proprietary/org.fdroid.fdroid-2.apk:system/app/org.fdroid.fdroid-2.apk
-
-endif
-
 # T-Mobile theme engine
 include vendor/mahdi/config/themes_common.mk
 
@@ -121,9 +95,8 @@ PRODUCT_PACKAGES += \
     SoundRecorder \
     VoiceDialer
 
-# OTA is useless on custom builds
-ifneq ($(WITHOUT_OTA),true)
 # Mahdi control center
+ifneq ($(WITHOUT_MC),true)
 PRODUCT_PACKAGES += \
     MahdiCenter
 endif
@@ -172,17 +145,38 @@ PRODUCT_PACKAGES += \
     Superuser \
     su
 
-# These can be skipped
+# Allow to skip prebuilt apps
 ifneq ($(WITHOUT_PROP_APPS),true)
 
 # Terminal Emulator
 PRODUCT_COPY_FILES += \
     vendor/mahdi/proprietary/Term.apk:system/app/Term.apk \
     vendor/mahdi/proprietary/lib/armeabi/libjackpal-androidterm4.so:system/lib/libjackpal-androidterm4.so
+
+# Xposed Framework Installer
+PRODUCT_COPY_FILES += \
+    vendor/mahdi/proprietary/XposedInstaller.apk:system/app/XposedInstaller.apk
+
+# Xposed AppSettings
+PRODUCT_COPY_FILES += \
+    vendor/mahdi/proprietary/XposedAppSettings.apk:system/app/XposedAppSettings.apk
+
+# Sunbeam Livewallpaper apk
+#PRODUCT_COPY_FILES +=  \
+#    vendor/mahdi/prebuilt/common/app/SunBeam.apk:system/app/SunBeam.apk
+
+# Goo.IM manager
+PRODUCT_COPY_FILES += \
+    vendor/mahdi/proprietary/com.s0up.goomanager-2.apk:system/app/com.s0up.goomanager-2.apk
+
+# Fdroid FOSS App Store
+PRODUCT_COPY_FILES += \
+    vendor/mahdi/proprietary/org.fdroid.fdroid-2.apk:system/app/org.fdroid.fdroid-2.apk
+
 endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.root_access=1
+    persist.sys.root_access=3
 
 # easy way to extend to add more packages
 -include vendor/extra/product.mk

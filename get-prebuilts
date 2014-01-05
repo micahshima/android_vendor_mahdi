@@ -5,7 +5,6 @@ UNPACK="unzip -q -o"
 echo "Fetching prebuilts:"
 
 set -e
-mkdir -p $BASEDIR/prebuilt/common/{app,lib}
 
 # Get Android Terminal Emulator (we use a prebuilt so it can update from the Market)
 echo "* Android Terminal Emulator"
