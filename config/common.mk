@@ -65,6 +65,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/mahdi/prebuilt/common/etc/mkshrc:system/etc/mkshrc
 
+# Gesture enabled JNI for IME
+PRODUCT_COPY_FILES += \
+    vendor/mahdi/prebuilt/common/lib/libjni_latinime.so:system/lib/libjni_latinime.so
+
+# These can be skipped
+ifneq ($(WITHOUT_PROP_APPS),true)
+
 # Xposed Framework Installer
 PRODUCT_COPY_FILES += \
     vendor/mahdi/proprietary/XposedInstaller.apk:system/app/XposedInstaller.apk
@@ -85,9 +92,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/mahdi/proprietary/org.fdroid.fdroid-2.apk:system/app/org.fdroid.fdroid-2.apk
 
-# Gesture enabled JNI for IME
-PRODUCT_COPY_FILES += \
-    vendor/mahdi/prebuilt/common/lib/libjni_latinime.so:system/lib/libjni_latinime.so
+endif
 
 # T-Mobile theme engine
 include vendor/mahdi/config/themes_common.mk
@@ -164,10 +169,14 @@ PRODUCT_PACKAGES += \
     Superuser \
     su
 
+# These can be skipped
+ifneq ($(WITHOUT_PROP_APPS),true)
+
 # Terminal Emulator
 PRODUCT_COPY_FILES += \
     vendor/mahdi/proprietary/Term.apk:system/app/Term.apk \
     vendor/mahdi/proprietary/lib/armeabi/libjackpal-androidterm4.so:system/lib/libjackpal-androidterm4.so
+endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.root_access=1

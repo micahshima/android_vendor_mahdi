@@ -26,6 +26,7 @@ txtrst=$(tput sgr0)             # reset
 
 # Local defaults, can be overriden by environment
 : ${PREFS_FROM_SOURCE:="false"}
+: ${WITHOUT_PROP_APPS:="true"}
 : ${USE_CCACHE:="true"}
 : ${CCACHE_NOSTATS:="false"}
 : ${CCACHE_DIR:="$(dirname $OUT)/ccache"}
@@ -222,6 +223,7 @@ else
         # Preparing
         echo -e "\n${bldblu}Preparing device [${DEVICE}]${txtrst}"
         export PREFS_FROM_SOURCE
+        export WITHOUT_PROP_APPS
         if [ "${VENDOR}" == "cm" ] || [ "${VENDOR}" == "mahdi" ]; then
                 breakfast "${VENDOR_LUNCH}${DEVICE}"
         else
