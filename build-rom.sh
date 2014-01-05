@@ -62,12 +62,12 @@ elif [ -r vendor/cm/config/common.mk ]; then
         MAJOR=$(cat $DIR/vendor/cm/config/common.mk | grep 'PRODUCT_VERSION_MAJOR = *' | sed  's/PRODUCT_VERSION_MAJOR = //g')
         MINOR=$(cat $DIR/vendor/cm/config/common.mk | grep 'PRODUCT_VERSION_MINOR = *' | sed  's/PRODUCT_VERSION_MINOR = //g')
         MAINT=$(cat $DIR/vendor/cm/config/common.mk | grep 'PRODUCT_VERSION_MAINTENANCE = *' | sed  's/PRODUCT_VERSION_MAINTENANCE = //g')
-elif [ -r vendor/mahdi/configs/common.mk ]; then
+elif [ -r vendor/mahdi/config/common.mk ]; then
         VENDOR="mahdi"
         VENDOR_LUNCH=""
-        MAJOR=$(cat $DIR/vendor/mahdi/configs/common_versions.mk | grep 'PRODUCT_VERSION_MAJOR = *' | sed  's/PRODUCT_VERSION_MAJOR = //g')
-        MINOR=$(cat $DIR/vendor/mahdi/configs/common_versions.mk | grep 'PRODUCT_VERSION_MINOR = *' | sed  's/PRODUCT_VERSION_MINOR = //g')
-        MAINT=$(cat $DIR/vendor/mahdi/configs/common_versions.mk | grep 'PRODUCT_VERSION_MAINTENANCE = *' | sed  's/PRODUCT_VERSION_MAINTENANCE = //g')
+        MAJOR=$(cat $DIR/vendor/mahdi/config/common_versions.mk | grep 'PRODUCT_VERSION_MAJOR = *' | sed  's/PRODUCT_VERSION_MAJOR = //g')
+        MINOR=$(cat $DIR/vendor/mahdi/config/common_versions.mk | grep 'PRODUCT_VERSION_MINOR = *' | sed  's/PRODUCT_VERSION_MINOR = //g')
+        MAINT=$(cat $DIR/vendor/mahdi/config/common_versions.mk | grep 'PRODUCT_VERSION_MAINTENANCE = *' | sed  's/PRODUCT_VERSION_MAINTENANCE = //g')
 elif [ -r $DIR/build/core/version_defaults.mk ]; then
         VENDOR="aosp"
         VENDOR_LUNCH=""

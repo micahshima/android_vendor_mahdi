@@ -1,27 +1,39 @@
-# Common overlay
-PRODUCT_PACKAGE_OVERLAYS += vendor/mahdi/overlay/common
+SUPERUSER_EMBEDDED := true
+SUPERUSER_PACKAGE_PREFIX := com.android.settings.cyanogenmod.superuser
 
-# Common dictionaries
-PRODUCT_PACKAGE_OVERLAYS += vendor/mahdi/overlay/dictionaries
+ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.com.google.clientidbase=android-google
+else
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.com.google.clientidbase=$(PRODUCT_GMS_CLIENTID_BASE)
+endif
 
-# Common product property overrides
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true \
     ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html \
     ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html \
-    ro.com.google.clientidbase=android-google \
     ro.com.android.wifi-watchlist=GoogleGuest \
     ro.setupwizard.enterprise_mode=1 \
     ro.com.android.dateformat=MM-dd-yyyy \
     ro.com.android.dataroaming=false
 
-# SELinux
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.selinux=1
 
-# SELinux filesystem labels
+ifneq ($(TARGET_BUILD_VARIANT),eng)
+# Enable ADB authentication
+ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=1
+endif
+
+# Backup Tool
+ifneq ($(WITH_GMS),true)
 PRODUCT_COPY_FILES += \
-     vendor/mahdi/prebuilt/common/etc/init.d/50selinuxrelabel:system/etc/init.d/50selinuxrelabel
+    vendor/mahdi/prebuilt/common/bin/backuptool.sh:system/bin/backuptool.sh \
+    vendor/mahdi/prebuilt/common/bin/backuptool.functions:system/bin/backuptool.functions \
+    vendor/mahdi/prebuilt/common/bin/50-mahdi.sh:system/addon.d/50-mahdi.sh \
+    vendor/mahdi/prebuilt/common/bin/blacklist:system/addon.d/blacklist
+endif
 
 # init.d support
 PRODUCT_COPY_FILES += \
@@ -32,11 +44,20 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/mahdi/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit
 
+# SELinux filesystem labels
+PRODUCT_COPY_FILES += \
+    vendor/mahdi/prebuilt/common/etc/init.d/50selinuxrelabel:system/etc/init.d/50selinuxrelabel
+
 # Mahdi-specific init file
 PRODUCT_COPY_FILES += \
     vendor/mahdi/prebuilt/common/etc/init.mahdi.rc:root/init.mahdi.rc
 
-# Enable SIP+VoIP
+# Compcache/Zram support
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/bin/compcache:system/bin/compcache \
+    vendor/cm/prebuilt/common/bin/handle_compcache:system/bin/handle_compcache
+
+# Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
@@ -44,64 +65,57 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/mahdi/prebuilt/common/etc/mkshrc:system/etc/mkshrc
 
-# Backup Tool
+# Xposed Framework Installer
 PRODUCT_COPY_FILES += \
-    vendor/mahdi/prebuilt/common/bin/backuptool.sh:system/bin/backuptool.sh \
-    vendor/mahdi/prebuilt/common/bin/backuptool.functions:system/bin/backuptool.functions \
-    vendor/mahdi/prebuilt/common/bin/blacklist:system/addon.d/blacklist \
-    vendor/mahdi/prebuilt/common/bin/50-mahdi.sh:system/addon.d/50-mahdi.sh \
-    vendor/mahdi/prebuilt/common/bin/99-backup.sh:system/addon.d/99-backup.sh \
-    vendor/mahdi/prebuilt/common/etc/backup.conf:system/etc/backup.conf
+    vendor/mahdi/proprietary/XposedInstaller.apk:system/app/XposedInstaller.apk
 
-# SuperSu
-SUPERUSER_EMBEDDED := false
-PRODUCT_COPY_FILES +=  \
-    vendor/mahdi/prebuilt/common/app/Superuser.apk:system/app/Superuser.apk \
-    vendor/mahdi/prebuilt/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon \
-    vendor/mahdi/prebuilt/common/etc/install-recovery.sh:system/etc/install-recovery.sh \
-    vendor/mahdi/prebuilt/common/etc/.installed_su_daemon:system/etc/.installed_su_daemon \
-    vendor/mahdi/prebuilt/common/bin/ext/su:system/bin/.ext/.su \
-    vendor/mahdi/prebuilt/common/xbin/daemonsu:system/xbin/daemonsu \
-    vendor/mahdi/prebuilt/common/xbin/su:system/xbin/su
-
-# Terminal Emulator
-PRODUCT_COPY_FILES +=  \
-    vendor/mahdi/proprietary/Term.apk:system/app/Term.apk \
-    vendor/mahdi/proprietary/lib/armeabi/libjackpal-androidterm4.so:system/lib/libjackpal-androidterm4.so
-
-# Xposed Framework apk
-PRODUCT_COPY_FILES +=  \
-    vendor/mahdi/prebuilt/common/app/XposedInstaller_2.4.1.apk:system/app/XposedInstaller_2.4.1.apk
-
-# AppSettings apk
-PRODUCT_COPY_FILES +=  \
-    vendor/mahdi/prebuilt/common/app/AppSettings.apk:system/app/AppSettings.apk
+# Xposed AppSettings
+PRODUCT_COPY_FILES += \
+    vendor/mahdi/proprietary/XposedAppSettings.apk:system/app/XposedAppSettings.apk
 
 # Sunbeam Livewallpaper apk
-PRODUCT_COPY_FILES +=  \
-    vendor/mahdi/prebuilt/common/app/SunBeam.apk:system/app/SunBeam.apk
+#PRODUCT_COPY_FILES +=  \
+#    vendor/mahdi/prebuilt/common/app/SunBeam.apk:system/app/SunBeam.apk
+
+# Gesture enabled JNI for IME
+PRODUCT_COPY_FILES += \
+    vendor/pa/prebuilt/common/lib/libjni_latinime.so:system/lib/libjni_latinime.so
 
 # T-Mobile theme engine
-include vendor/mahdi/configs/themes_common.mk
+include vendor/mahdi/config/themes_common.mk
+
+# Required Mahdi packages
+PRODUCT_PACKAGES += \
+    Development \
+    LatinIME \
+    BluetoothExt
+
+# Optional CM packages
+    Apollo \
+    CMFileManager \
+    libcyanogen-dsp \
+    DSPManager \
+    VoicePlus
 
 # Mahdi packages
 PRODUCT_PACKAGES += \
-    SoundRecorder \
-    Basic \
-    CMFileManager \
-    LockClock \
-    ScreenRecorder \
-    libscreenrecorder \
-    Apollo \
-    DSPManager \
-    libcyanogen-dsp \
     audio_effects.conf \
-    MahdiCenter     
+    Basic \
+    libemoji \
+    MahdiCenter \
+    libscreenrecorder \
+    ScreenRecorder \
+    SoundRecorder \
+    VoiceDialer
 
-# Extra tools
+# Stock AOSP packages
+PRODUCT_PACKAGES += \
+    Launcher3 \
+    CellBroadcastReceiver
+
+# Extra tools in Mahdi
 PRODUCT_PACKAGES += \
     bash \
-    Basic \
     openvpn \
     e2fsck \
     mke2fs \
@@ -132,8 +146,34 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     rsync
 
+# These packages are excluded from user builds
+ifneq ($(TARGET_BUILD_VARIANT),user)
+
+PRODUCT_PACKAGES += \
+    procmem \
+    procrank \
+    Superuser \
+    su
+
+# Terminal Emulator
+PRODUCT_COPY_FILES += \
+    vendor/mahdi/proprietary/Term.apk:system/app/Term.apk \
+    vendor/mahdi/proprietary/lib/armeabi/libjackpal-androidterm4.so:system/lib/libjackpal-androidterm4.so
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.root_access=1
+else
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.root_access=0
+
+endif
+
 # easy way to extend to add more packages
 -include vendor/extra/product.mk
 
+PRODUCT_PACKAGE_OVERLAYS += vendor/mahdi/overlay/common
+PRODUCT_PACKAGE_OVERLAYS += vendor/mahdi/overlay/dictionaries
+
 # Inherit common product build prop overrides
--include vendor/mahdi/configs/common_versions.mk
+-include vendor/mahdi/config/common_versions.mk

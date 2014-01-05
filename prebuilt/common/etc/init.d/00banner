@@ -1,3 +1,2 @@
 #!/system/bin/sh
-log -p i -t start "    SuperNexus - Google's Nexus experience on non-Nexus devices";
-
+log -p i -t start "Welcome to Android `getprop ro.build.version.release` / Mahdi-`getprop ro.mahdi.version`";

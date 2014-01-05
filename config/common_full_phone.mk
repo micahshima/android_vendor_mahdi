@@ -1,6 +1,6 @@
 # Inherit common stuff
-$(call inherit-product, vendor/mahdi/configs/common_full.mk)
+$(call inherit-product, vendor/mahdi/config/common_full.mk)
 
-$(call inherit-product, vendor/mahdi/configs/telephony.mk)
+$(call inherit-product, vendor/mahdi/config/telephony.mk)
 
 
