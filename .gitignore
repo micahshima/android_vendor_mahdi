@@ -1,5 +1,0 @@
-# Ignore downloaded components
-proprietary/*
-
-# Ignore download stamp
-prebuilt/common/.get-prebuilts
