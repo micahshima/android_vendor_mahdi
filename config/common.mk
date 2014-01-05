@@ -79,7 +79,7 @@ PRODUCT_COPY_FILES += \
 
 # Gesture enabled JNI for IME
 PRODUCT_COPY_FILES += \
-    vendor/pa/prebuilt/common/lib/libjni_latinime.so:system/lib/libjni_latinime.so
+    vendor/mahdi/prebuilt/common/lib/libjni_latinime.so:system/lib/libjni_latinime.so
 
 # T-Mobile theme engine
 include vendor/mahdi/config/themes_common.mk
@@ -91,17 +91,18 @@ PRODUCT_PACKAGES += \
     BluetoothExt
 
 # Optional CM packages
+PRODUCT_PACKAGES += \
     Apollo \
     CMFileManager \
     libcyanogen-dsp \
     DSPManager \
+    libemoji \
     VoicePlus
 
 # Mahdi packages
 PRODUCT_PACKAGES += \
     audio_effects.conf \
     Basic \
-    libemoji \
     MahdiCenter \
     libscreenrecorder \
     ScreenRecorder \
