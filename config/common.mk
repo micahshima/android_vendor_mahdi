@@ -77,6 +77,14 @@ PRODUCT_COPY_FILES += \
 #PRODUCT_COPY_FILES +=  \
 #    vendor/mahdi/prebuilt/common/app/SunBeam.apk:system/app/SunBeam.apk
 
+# Goo.IM manager
+PRODUCT_COPY_FILES += \
+    vendor/mahdi/proprietary/com.s0up.goomanager-2.apk:system/app/com.s0up.goomanager-2.apk
+
+# Fdroid FOSS App Store
+PRODUCT_COPY_FILES += \
+    vendor/mahdi/proprietary/org.fdroid.fdroid-2.apk:system/app/org.fdroid.fdroid-2.apk
+
 # Gesture enabled JNI for IME
 PRODUCT_COPY_FILES += \
     vendor/mahdi/prebuilt/common/lib/libjni_latinime.so:system/lib/libjni_latinime.so
