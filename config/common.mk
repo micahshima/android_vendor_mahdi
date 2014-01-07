@@ -84,6 +84,7 @@ PRODUCT_PACKAGES += \
     libcyanogen-dsp \
     DSPManager \
     libemoji \
+    LockClock \
     VoicePlus
 
 # Mahdi packages
