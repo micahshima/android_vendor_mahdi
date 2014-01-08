@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Android AOSP/AOSPA/CM/SLIM/MAHDI build script
-# Version 2.0.10
+# Version 2.0.11
 
 # Clean scrollback buffer
 echo -e '\0033\0143'
@@ -72,7 +72,7 @@ elif [ -r vendor/mahdi/config/common.mk ]; then
         MAINT=$(cat $DIR/vendor/mahdi/config/common_versions.mk | grep 'PRODUCT_VERSION_MAINTENANCE = *' | sed  's/PRODUCT_VERSION_MAINTENANCE = //g')
 elif [ -r $DIR/build/core/version_defaults.mk ]; then
         VENDOR="aosp"
-        VENDOR_LUNCH=""
+        VENDOR_LUNCH="full_"
         MAJOR=$(cat $DIR/build/core/version_defaults.mk | grep 'PLATFORM_VERSION := *' | awk '{print $3}' | cut -f2 -d= | cut -f1 -d.)
         MINOR=$(cat $DIR/build/core/version_defaults.mk | grep 'PLATFORM_VERSION := *' | awk '{print $3}' | cut -f2 -d= | cut -f2 -d.)
         MAINT=$(cat $DIR/build/core/version_defaults.mk | grep 'PLATFORM_VERSION := *' | awk '{print $3}' | cut -f2 -d= | cut -f3 -d.)
@@ -199,19 +199,31 @@ else
         echo -e "${bldcya}No prebuilts script in this tree${txtrst}"
 fi
 
+# Export global variables for buildsystem
+export PREFS_FROM_SOURCE
+export WITHOUT_PROP_APPS
+export WITHOUT_MC
+
 # Decide if we enter interactive mode or default build mode
 if [ -n "${INTERACTIVE}" ]; then
         echo -e "\n${bldblu}Enabling interactive mode. Possible commands are:${txtrst}"
 
-        echo -e "Prepare device environment:[${bldgrn}lunch ${VENDOR_LUNCH}${DEVICE}-eng${txtrst}]"
-
-        if [ "${VENDOR}" == "aosp" ]; then
-                echo -e "Build device:[${bldgrn}schedtool -B -n 1 -e ionice -n 1 make -j${THREADS} ${CCACHE_OPT} ${JAVA_VERSION}${txtrst}]"
+        if [ "${VENDOR}" == "cm" ] || [ "${VENDOR}" == "mahdi" ]; then
+                echo -e "To prepare device environment:[${bldgrn}breakfast ${VENDOR_LUNCH}${DEVICE}${txtrst}]"
         else
-                echo -e "Build device:[${bldgrn}mka bacon${txtrst}]"
+                echo -e "To prepare device environment:[${bldgrn}lunch ${VENDOR_LUNCH}${DEVICE}-userdebug${txtrst}]"
         fi
 
-        echo -e "Emulate device:[${bldgrn}vncserver :1; DISPLAY=:1 emulator&${txtrst}]"
+        if [ "${VENDOR}" == "aosp" ]; then
+                echo -e "To build device:[${bldgrn}make otapackage${txtrst}]"
+        else
+                echo -e "To build device:[${bldgrn}mka bacon${txtrst}]"
+        fi
+
+        echo -e "To see all make commands:[${bldgrn}make help${txtrst}]"
+        echo -e "To emulate device:[${bldgrn}vncserver :1; DISPLAY=:1 emulator&${txtrst}]"
+        echo -e "You may try to prefix make commands with:[${bldgrn}schedtool -B -n 1 -e ionice -n 1${txtrst}]"
+        echo -e "You may try to suffix make commands with:[${bldgrn}-j${THREADS} ${CCACHE_OPT} ${JAVA_VERSION}${txtrst}]"
 
         # Setup and enter interactive environment
         echo -e "${bldblu}Dropping to interactive shell...${txtrst}"
@@ -223,9 +235,6 @@ else
 
         # Preparing
         echo -e "\n${bldblu}Preparing device [${DEVICE}]${txtrst}"
-        export PREFS_FROM_SOURCE
-        export WITHOUT_PROP_APPS
-        export WITHOUT_MC
         if [ "${VENDOR}" == "cm" ] || [ "${VENDOR}" == "mahdi" ]; then
                 breakfast "${VENDOR_LUNCH}${DEVICE}"
         else
@@ -234,7 +243,7 @@ else
 
         echo -e "${bldblu}Starting compilation${txtrst}"
         if [ "${VENDOR}" == "aosp" ]; then
-                schedtool -B -n 1 -e ionice -n 1 make -j${THREADS} ${CCACHE_OPT} ${JAVA_VERSION}
+                schedtool -B -n 1 -e ionice -n 1 make -j${THREADS} ${CCACHE_OPT} ${JAVA_VERSION} otapackage
         elif [ "${VENDOR}" == "cm" ] || [ "${VENDOR}" == "mahdi" ]; then
                 brunch "${VENDOR_LUNCH}${DEVICE}"
         else
