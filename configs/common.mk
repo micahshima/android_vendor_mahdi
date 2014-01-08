@@ -93,7 +93,6 @@ PRODUCT_PACKAGES += \
     LockClock \
     ScreenRecorder \
     libscreenrecorder \
-    BluetoothExt \
     Apollo \
     DSPManager \
     libcyanogen-dsp \
