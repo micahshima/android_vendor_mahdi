@@ -21,10 +21,10 @@ $CURL -L -o $BASEDIR/proprietary/XposedAppSettings.apk -O -L "http://dl-count.xp
 
 # Get GooManager (Source: http://goo.im/devs/s0updev/goomanager)
 echo "* Goo Manager"
-$CURL -L -o $BASEDIR/prebuilt/common/apk/com.s0up.goomanager-2.apk -O -L "http://goo.im/devs/s0updev/goomanager/GooManager_2.1.3.apk"
+$CURL -L -o $BASEDIR/proprietary/com.s0up.goomanager-2.apk -O -L "http://goo.im/devs/s0updev/goomanager/GooManager_2.1.3.apk"
 
 # Get FDroid FOSS Market (http://forum.xda-developers.com/showthread.php?p=34190204)
 echo "* FDroid FOSS Market"
-$CURL  -L -o $BASEDIR/downloads/org.fdroid.fdroid-2.apk -O -L "https://f-droid.org/FDroid.apk"
+$CURL  -L -o $BASEDIR/proprietary/org.fdroid.fdroid-2.apk -O -L "https://f-droid.org/FDroid.apk"
 
 set +e
