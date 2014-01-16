@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Android AOSP/AOSPA/CM/SLIM/MAHDI build script
-# Version 2.0.11
+# Version 2.0.12
 
 # Clean scrollback buffer
 echo -e '\0033\0143'
@@ -46,36 +46,36 @@ DEVICE="$1"
 EXTRAS="$2"
 
 # Get build version
-if [ -r $DIR/vendor/pa/vendor.mk ]; then
+if [ -r ${DIR}/vendor/pa/vendor.mk ]; then
         VENDOR="aospa"
         VENDOR_LUNCH="pa_"
-        MAJOR=$(cat $DIR/vendor/pa/vendor.mk | grep 'ROM_VERSION_MAJOR := *' | sed  's/ROM_VERSION_MAJOR := //g')
-        MINOR=$(cat $DIR/vendor/pa/vendor.mk | grep 'ROM_VERSION_MINOR := *' | sed  's/ROM_VERSION_MINOR := //g')
-        MAINT=$(cat $DIR/vendor/pa/vendor.mk | grep 'ROM_VERSION_MAINTENANCE := *' | sed  's/ROM_VERSION_MAINTENANCE := //g')
-elif [ -r $DIR/vendor/slim/vendorsetup.sh ]; then
+        MAJOR=$(cat ${DIR}/vendor/pa/vendor.mk | grep 'ROM_VERSION_MAJOR := *' | sed  's/ROM_VERSION_MAJOR := //g')
+        MINOR=$(cat ${DIR}/vendor/pa/vendor.mk | grep 'ROM_VERSION_MINOR := *' | sed  's/ROM_VERSION_MINOR := //g')
+        MAINT=$(cat ${DIR}/vendor/pa/vendor.mk | grep 'ROM_VERSION_MAINTENANCE := *' | sed  's/ROM_VERSION_MAINTENANCE := //g')
+elif [ -r ${DIR}/vendor/slim/vendorsetup.sh ]; then
         VENDOR="slim"
         VENDOR_LUNCH="slim_"
-        MAJOR=$(cat $DIR/vendor/slim/config/common.mk | grep 'PRODUCT_VERSION_MAJOR = *' | sed  's/PRODUCT_VERSION_MAJOR = //g')
-        MINOR=$(cat $DIR/vendor/slim/config/common.mk | grep 'PRODUCT_VERSION_MINOR = *' | sed  's/PRODUCT_VERSION_MINOR = //g')
-        MAINT=$(cat $DIR/vendor/slim/config/common.mk | grep 'PRODUCT_VERSION_MAINTENANCE = *' | sed  's/PRODUCT_VERSION_MAINTENANCE = //g')
+        MAJOR=$(cat ${DIR}/vendor/slim/config/common.mk | grep 'PRODUCT_VERSION_MAJOR = *' | sed  's/PRODUCT_VERSION_MAJOR = //g')
+        MINOR=$(cat ${DIR}/vendor/slim/config/common.mk | grep 'PRODUCT_VERSION_MINOR = *' | sed  's/PRODUCT_VERSION_MINOR = //g')
+        MAINT=$(cat ${DIR}/vendor/slim/config/common.mk | grep 'PRODUCT_VERSION_MAINTENANCE = *' | sed  's/PRODUCT_VERSION_MAINTENANCE = //g')
 elif [ -r vendor/cm/config/common.mk ]; then
         VENDOR="cm"
         VENDOR_LUNCH=""
-        MAJOR=$(cat $DIR/vendor/cm/config/common.mk | grep 'PRODUCT_VERSION_MAJOR = *' | sed  's/PRODUCT_VERSION_MAJOR = //g')
-        MINOR=$(cat $DIR/vendor/cm/config/common.mk | grep 'PRODUCT_VERSION_MINOR = *' | sed  's/PRODUCT_VERSION_MINOR = //g')
-        MAINT=$(cat $DIR/vendor/cm/config/common.mk | grep 'PRODUCT_VERSION_MAINTENANCE = *' | sed  's/PRODUCT_VERSION_MAINTENANCE = //g')
+        MAJOR=$(cat ${DIR}/vendor/cm/config/common.mk | grep 'PRODUCT_VERSION_MAJOR = *' | sed  's/PRODUCT_VERSION_MAJOR = //g')
+        MINOR=$(cat ${DIR}/vendor/cm/config/common.mk | grep 'PRODUCT_VERSION_MINOR = *' | sed  's/PRODUCT_VERSION_MINOR = //g')
+        MAINT=$(cat ${DIR}/vendor/cm/config/common.mk | grep 'PRODUCT_VERSION_MAINTENANCE = *' | sed  's/PRODUCT_VERSION_MAINTENANCE = //g')
 elif [ -r vendor/mahdi/config/common.mk ]; then
         VENDOR="mahdi"
         VENDOR_LUNCH=""
-        MAJOR=$(cat $DIR/vendor/mahdi/config/common_versions.mk | grep 'PRODUCT_VERSION_MAJOR = *' | sed  's/PRODUCT_VERSION_MAJOR = //g')
-        MINOR=$(cat $DIR/vendor/mahdi/config/common_versions.mk | grep 'PRODUCT_VERSION_MINOR = *' | sed  's/PRODUCT_VERSION_MINOR = //g')
-        MAINT=$(cat $DIR/vendor/mahdi/config/common_versions.mk | grep 'PRODUCT_VERSION_MAINTENANCE = *' | sed  's/PRODUCT_VERSION_MAINTENANCE = //g')
-elif [ -r $DIR/build/core/version_defaults.mk ]; then
+        MAJOR=$(cat ${DIR}/vendor/mahdi/config/common_versions.mk | grep 'PRODUCT_VERSION_MAJOR = *' | sed  's/PRODUCT_VERSION_MAJOR = //g')
+        MINOR=$(cat ${DIR}/vendor/mahdi/config/common_versions.mk | grep 'PRODUCT_VERSION_MINOR = *' | sed  's/PRODUCT_VERSION_MINOR = //g')
+        MAINT=$(cat ${DIR}/vendor/mahdi/config/common_versions.mk | grep 'PRODUCT_VERSION_MAINTENANCE = *' | sed  's/PRODUCT_VERSION_MAINTENANCE = //g')
+elif [ -r ${DIR}/build/core/version_defaults.mk ]; then
         VENDOR="aosp"
         VENDOR_LUNCH="full_"
-        MAJOR=$(cat $DIR/build/core/version_defaults.mk | grep 'PLATFORM_VERSION := *' | awk '{print $3}' | cut -f2 -d= | cut -f1 -d.)
-        MINOR=$(cat $DIR/build/core/version_defaults.mk | grep 'PLATFORM_VERSION := *' | awk '{print $3}' | cut -f2 -d= | cut -f2 -d.)
-        MAINT=$(cat $DIR/build/core/version_defaults.mk | grep 'PLATFORM_VERSION := *' | awk '{print $3}' | cut -f2 -d= | cut -f3 -d.)
+        MAJOR=$(cat ${DIR}/build/core/version_defaults.mk | grep 'PLATFORM_VERSION := *' | awk '{print $3}' | cut -f2 -d= | cut -f1 -d.)
+        MINOR=$(cat ${DIR}/build/core/version_defaults.mk | grep 'PLATFORM_VERSION := *' | awk '{print $3}' | cut -f2 -d= | cut -f2 -d.)
+        MAINT=$(cat ${DIR}/build/core/version_defaults.mk | grep 'PLATFORM_VERSION := *' | awk '{print $3}' | cut -f2 -d= | cut -f3 -d.)
 else
         echo -e "${redbld}Invalid android tree, exiting...${txtrst}"
         exit 1
@@ -186,12 +186,21 @@ if [ ! -r "${DIR}/out/versions_checked.mk" ] && [ -n "$(java -version 2>&1 | gre
         JAVA_VERSION="java_version=${JVER}"
 fi
 
-if [ -r vendor/${VENDOR}/get-prebuilts ]; then
-        if [ -r vendor/${VENDOR}/proprietary/.get-prebuilts ]; then
+if [ -r ${DIR}/build/addons/blobs.sh ]; then
+        if [ -r ${DIR}/build/addons/blobs/.blobs.stamp ]; then
+                echo -e "${bldgrn}Already downloaded blobs${txtrst}"
+        else
+                echo -e "${bldblu}Fetching blobs${txtrst}"
+                pushd ${DIR}/build/addons/blobs > /dev/null
+                source ./blobs.sh && touch ${DIR}/build/addons/blobs/.blobs.stamp
+                popd > /dev/null
+        fi
+elif [ -r ${DIR}/vendor/${VENDOR}/get-prebuilts ]; then
+        if [ -r ${DIR}/vendor/${VENDOR}/proprietary/.get-prebuilts ]; then
                 echo -e "${bldgrn}Already downloaded prebuilts${txtrst}"
         else
                 echo -e "${bldblu}Downloading prebuilts${txtrst}"
-                pushd vendor/${VENDOR} > /dev/null
+                pushd ${DIR}/vendor/${VENDOR} > /dev/null
                 source ./get-prebuilts && touch proprietary/.get-prebuilts
                 popd > /dev/null
         fi
@@ -227,7 +236,7 @@ if [ -n "${INTERACTIVE}" ]; then
 
         # Setup and enter interactive environment
         echo -e "${bldblu}Dropping to interactive shell...${txtrst}"
-        bash --init-file build/envsetup.sh -i
+        bash --init-file ${DIR}/build/envsetup.sh -i
 else
         # Setup environment
         echo -e "\n${bldblu}Setting up environment${txtrst}"
