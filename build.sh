@@ -30,7 +30,7 @@ txtrst=$(tput sgr0)             # reset
 : ${WITHOUT_MC:="true"}
 : ${USE_CCACHE:="true"}
 : ${CCACHE_NOSTATS:="false"}
-: ${CCACHE_DIR:="$(dirname $OUT)/ccache"}
+: ${CCACHE_DIR:="$(dirname ~/.ccache"}
 : ${THREADS:="$(cat /proc/cpuinfo | grep "^processor" | wc -l)"}
 
 # If there is more than one jdk installed, use latest 6.x
