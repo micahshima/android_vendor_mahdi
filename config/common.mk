@@ -157,26 +157,6 @@ PRODUCT_COPY_FILES += \
     vendor/mahdi/proprietary/Term.apk:system/app/Term.apk \
     vendor/mahdi/proprietary/lib/armeabi/libjackpal-androidterm4.so:system/lib/libjackpal-androidterm4.so
 
-# Xposed Framework Installer
-PRODUCT_COPY_FILES += \
-    vendor/mahdi/proprietary/XposedInstaller.apk:system/app/XposedInstaller.apk
-
-# Xposed AppSettings
-PRODUCT_COPY_FILES += \
-    vendor/mahdi/proprietary/XposedAppSettings.apk:system/app/XposedAppSettings.apk
-
-# Sunbeam Livewallpaper apk
-#PRODUCT_COPY_FILES +=  \
-#    vendor/mahdi/prebuilt/common/app/SunBeam.apk:system/app/SunBeam.apk
-
-# Goo.IM manager
-PRODUCT_COPY_FILES += \
-    vendor/mahdi/proprietary/com.s0up.goomanager-2.apk:system/app/com.s0up.goomanager-2.apk
-
-# Fdroid FOSS App Store
-PRODUCT_COPY_FILES += \
-    vendor/mahdi/proprietary/org.fdroid.fdroid-2.apk:system/app/org.fdroid.fdroid-2.apk
-
 endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
