@@ -87,7 +87,8 @@ PRODUCT_PACKAGES += \
     DSPManager \
     libemoji \
     LockClock \
-    VoicePlus
+    VoicePlus \
+    OmniSwitch
 
 # Mahdi packages
 PRODUCT_PACKAGES += \
