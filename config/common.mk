@@ -88,7 +88,8 @@ PRODUCT_PACKAGES += \
     libemoji \
     LockClock \
     VoicePlus \
-    OmniSwitch
+    OmniSwitch \
+    KernelTweaker
 
 # Mahdi packages
 PRODUCT_PACKAGES += \
