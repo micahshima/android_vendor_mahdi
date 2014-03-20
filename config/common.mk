@@ -45,10 +45,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/mahdi/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit
 
-# SELinux filesystem labels
-PRODUCT_COPY_FILES += \
-    vendor/mahdi/prebuilt/common/etc/init.d/50selinuxrelabel:system/etc/init.d/50selinuxrelabel
-
 # Mahdi-specific init file
 PRODUCT_COPY_FILES += \
     vendor/mahdi/prebuilt/common/etc/init.mahdi.rc:root/init.mahdi.rc
