@@ -5,7 +5,7 @@
 
 export C=/tmp/backupdir
 export S=/system
-export V=11
+export V=4.4
 
 # Preserve /system/addon.d in /tmp/addon.d
 preserve_addon_d() {
@@ -20,13 +20,31 @@ restore_addon_d() {
   rm -rf /tmp/addon.d/
 }
 
+# Backup Xposed Framework (bin/app_process)
+xposed_backup()
+{
+	if ( grep -ciE ".*with Xposed support \\(version (.+)\\).*" /system/bin/app_process )
+		then
+			cp /system/bin/app_process /tmp/backupdir/
+	fi
+}
+
+# Restore Xposed Framework (bin/app_process)
+xposed_restore()
+{
+	if [ -f /tmp/backupdir/app_process ]
+		then
+			mv /system/bin/app_process /system/bin/app_process.orig
+			cp /tmp/backupdir/app_process /system/bin/
+	fi
+}
+
 # Proceed only if /system is the expected major and minor version
 check_prereq() {
-if ( ! grep -q "^ro.mahdi.version=$2.*" /system/build.prop ); then
-  echo "Not backing up files from incompatible version: $2"
-  return 0
+if ( ! grep -q "^ro.build.version.release=$V.*" /system/build.prop ); then
+  echo "Not backing up files from incompatible version: $V"
+  exit 127
 fi
-return 1
 }
 
 check_blacklist() {
@@ -68,11 +86,8 @@ done
 case "$1" in
   backup)
     mkdir -p $C
-    if check_prereq; then
-        if check_whitelist system; then
-            exit 127
-        fi
-    fi
+    xposed_backup
+    check_prereq
     check_blacklist system
     preserve_addon_d
     run_stage pre-backup
@@ -80,11 +95,8 @@ case "$1" in
     run_stage post-backup
   ;;
   restore)
-    if check_prereq; then
-        if check_whitelist tmp; then
-            exit 127
-        fi
-    fi
+    xposed_restore
+    check_prereq
     check_blacklist tmp
     run_stage pre-restore
     run_stage restore
