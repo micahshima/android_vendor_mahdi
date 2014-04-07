@@ -89,7 +89,8 @@ PRODUCT_PACKAGES += \
     LockClock \
     VoicePlus \
     OmniSwitch \
-    KernelTweaker
+    KernelTweaker \
+    MahdiSetupWizard
 
 # Mahdi packages
 PRODUCT_PACKAGES += \
