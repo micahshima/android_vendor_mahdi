@@ -31,7 +31,6 @@ PRODUCT_COPY_FILES += \
     vendor/mahdi/prebuilt/common/bin/backuptool.sh:system/bin/backuptool.sh \
     vendor/mahdi/prebuilt/common/bin/backuptool.functions:system/bin/backuptool.functions \
     vendor/mahdi/prebuilt/common/bin/50-mahdi.sh:system/addon.d/50-mahdi.sh \
-    vendor/mahdi/prebuilt/common/bin/blacklist:system/addon.d/blacklist \
     vendor/mahdi/prebuilt/common/bin/99-backup.sh:system/addon.d/99-backup.sh \
     vendor/mahdi/prebuilt/common/etc/backup.conf:system/etc/backup.conf
 endif
@@ -72,13 +71,11 @@ include vendor/mahdi/config/themes_common.mk
 # Required Mahdi packages
 PRODUCT_PACKAGES += \
     Development \
-    LatinIME \
-    BluetoothExt
+    LatinIME
 
 # Optional Mahdi packages
 PRODUCT_PACKAGES += \
     Apollo \
-    CMFileManager \
     libcyanogen-dsp \
     DSPManager \
     libemoji \
@@ -86,27 +83,24 @@ PRODUCT_PACKAGES += \
     VoicePlus \
     OmniSwitch \
     KernelTweaker \
-    MahdiSetupWizard
-
-# Mahdi packages
-PRODUCT_PACKAGES += \
-    audio_effects.conf \
-    Basic \
-    libscreenrecorder \
-    ScreenRecorder \
-    SoundRecorder \
-    VoiceDialer
+    MahdiSetupWizard \
+    ScreenRecorder
 
 # Mahdi control center
 ifneq ($(WITHOUT_MC),true)
 PRODUCT_PACKAGES += \
     MahdiCenter
-endif
+endif 
 
 # Stock AOSP packages
 PRODUCT_PACKAGES += \
-    Launcher3 \
-    CellBroadcastReceiver
+    audio_effects.conf \
+    Basic \
+    libscreenrecorder \
+    SoundRecorder \
+    VoiceDialer \
+    CellBroadcastReceiver \
+    Launcher3   
 
 # Extra tools in Mahdi
 PRODUCT_PACKAGES += \
