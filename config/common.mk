@@ -84,7 +84,8 @@ PRODUCT_PACKAGES += \
     OmniSwitch \
     KernelTweaker \
     MahdiSetupWizard \
-    ScreenRecorder
+    ScreenRecorder \
+    Trebuchet
 
 # Mahdi control center
 ifneq ($(WITHOUT_MC),true)
@@ -99,8 +100,7 @@ PRODUCT_PACKAGES += \
     libscreenrecorder \
     SoundRecorder \
     VoiceDialer \
-    CellBroadcastReceiver \
-    Launcher3   
+    CellBroadcastReceiver   
 
 # Extra tools in Mahdi
 PRODUCT_PACKAGES += \
