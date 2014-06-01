@@ -27,7 +27,6 @@ txtrst=$(tput sgr0)             # reset
 # Local defaults, can be overriden by environment
 : ${PREFS_FROM_SOURCE:="false"}
 : ${WITHOUT_PROP_APPS:="true"}
-: ${WITHOUT_MC:="true"}
 : ${USE_CCACHE:="true"}
 : ${CCACHE_NOSTATS:="false"}
 : ${CCACHE_DIR:="$(dirname ~/.ccache"}
@@ -211,7 +210,6 @@ fi
 # Export global variables for buildsystem
 export PREFS_FROM_SOURCE
 export WITHOUT_PROP_APPS
-export WITHOUT_MC
 
 # Decide if we enter interactive mode or default build mode
 if [ -n "${INTERACTIVE}" ]; then

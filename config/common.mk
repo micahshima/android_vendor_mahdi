@@ -85,13 +85,7 @@ PRODUCT_PACKAGES += \
     KernelTweaker \
     MahdiSetupWizard \
     ScreenRecorder \
-    Trebuchet
-
-# Mahdi control center
-ifneq ($(WITHOUT_MC),true)
-PRODUCT_PACKAGES += \
-    MahdiCenter
-endif 
+    Trebuchet 
 
 # Stock AOSP packages
 PRODUCT_PACKAGES += \
